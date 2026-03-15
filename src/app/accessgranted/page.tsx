@@ -3,7 +3,7 @@
 
 		export default function Page() {
 			const [accessCodes, setAccessCodes] = useState<{ [key: string]: string }>({});
-			const handleAccessCodeSubmit = async (e) => {
+			const handleAccessCodeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 				e.preventDefault();
 				const code = accessCodes['wearingOfTheGreen'] || "";
 				if (!code) {
