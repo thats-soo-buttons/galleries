@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function GalleryPage() {
   const searchParams = useSearchParams();
-  const folderId = searchParams.get("folderId");
+  const folderId = searchParams ? searchParams.get("folderId") : null;
   const [slug, setSlug] = useState("");
 
   useEffect(() => {
