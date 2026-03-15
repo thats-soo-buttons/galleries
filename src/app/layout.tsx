@@ -26,8 +26,59 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ position: "relative" }}
       >
+        {/* Personal & Support Banner */}
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          zIndex: 1000,
+          background: "linear-gradient(90deg,#ffd700,#ffb700,#ffe066,#fffbe6)",
+          color: "#222",
+          fontWeight: 700,
+          fontSize: "1.08em",
+          padding: "16px 0 12px 0",
+          textAlign: "center",
+          boxShadow: "0 2px 12px #0002",
+          letterSpacing: "0.01em",
+        }}>
+          <span>
+            {/* Removed personal/income sentence from top bar */}
+            <span style={{ display: 'inline-block', margin: '0 10px' }}>
+              <a href="https://ko-fi.com/thatssoobuttons" target="_blank" rel="noopener noreferrer" style={{ color: '#d94f6a', textDecoration: 'underline', fontWeight: 700 }}>Support me on Ko-Fi</a>
+            </span>
+            <span style={{ display: 'inline-block', margin: '0 10px' }}>
+              <a href="https://cash.app/$888buttons" target="_blank" rel="noopener noreferrer" style={{ color: '#0077cc', textDecoration: 'underline', fontWeight: 700 }}>Donate via Cash App</a>
+            </span>
+            <span style={{ display: 'inline-block', margin: '0 10px' }}>
+              <a href="https://twitch.tv/thats_soo_buttons" target="_blank" rel="noopener noreferrer" style={{ color: '#9147ff', textDecoration: 'underline', fontWeight: 700 }}>Amazon Prime? Subscribe FREE on Twitch</a>
+              <span style={{ fontSize: '0.95em', fontWeight: 500, color: '#333', marginLeft: 4 }}>*Resubscribe each month—no cost to you!</span>
+            </span>
+          </span>
+        </div>
+        <div style={{ marginTop: 56 }} />
         {children}
+        {/* Thank You Banner */}
+        <div style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          width: "100vw",
+          zIndex: 1000,
+          background: "linear-gradient(90deg,#e0ffe0,#b2f7b2,#d6ffd6,#f6fff6)",
+          color: "#22334a",
+          fontWeight: 600,
+          fontSize: "1em",
+          padding: "10px 0",
+          textAlign: "center",
+          boxShadow: "0 -2px 12px #0002"
+        }}>
+          <span>
+            Thank you for visiting and supporting an independent artist! Your appreciation means the world.
+          </span>
+        </div>
       </body>
     </html>
   );
