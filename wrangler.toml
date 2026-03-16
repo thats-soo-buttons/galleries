@@ -1,0 +1,6 @@
+# Wrangler configuration for OpenNext/Cloudflare Pages
+compatibility_date = "2026-03-15"
+pages_build_output_dir = ".open-next"
+
+# Optional: Add compatibility_flags if needed
+# compatibility_flags = ["nodejs_compat"]
