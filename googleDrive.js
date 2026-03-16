@@ -1,8 +1,22 @@
+// Triggering a fresh Vercel build
 const { google } = require('googleapis');
-const path = require('path');
+
+// Load Google service account credentials from environment variables
+const credentials = {
+  type: process.env.GOOGLE_TYPE,
+  project_id: process.env.GOOGLE_PROJECT_ID,
+  private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+  private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+  client_email: process.env.GOOGLE_CLIENT_EMAIL,
+  client_id: process.env.GOOGLE_CLIENT_ID,
+  auth_uri: process.env.GOOGLE_AUTH_URI,
+  token_uri: process.env.GOOGLE_TOKEN_URI,
+  auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_PROVIDER_X509_CERT_URL,
+  client_x509_cert_url: process.env.GOOGLE_CLIENT_X509_CERT_URL,
+};
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.resolve(process.cwd(), 'google-service-account.json'), // Use project root for absolute path
+  credentials,
   scopes: ['https://www.googleapis.com/auth/drive.readonly'],
 });
 
