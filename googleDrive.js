@@ -42,6 +42,12 @@ async function listImages(folderId) {
     }));
   } catch (error) {
     console.error('Google Drive API error:', error);
+    if (error && error.response && error.response.data) {
+      console.error('Google Drive API error details:', error.response.data);
+    }
+    if (error && error.stack) {
+      console.error('Google Drive API error stack:', error.stack);
+    }
     throw error;
   }
 }

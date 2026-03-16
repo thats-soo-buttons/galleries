@@ -15,6 +15,10 @@ export default async function handler(req, res) {
     const images = await listImages(folderId);
     return res.status(200).json({ images });
   } catch (error) {
+    console.error('listImages API error:', error);
+    if (error && error.stack) {
+      console.error('listImages API error stack:', error.stack);
+    }
     return res.status(500).json({ error: 'Failed to fetch images', details: error.message });
   }
 }
