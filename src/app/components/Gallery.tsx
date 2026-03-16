@@ -26,7 +26,7 @@ const Gallery: React.FC<GalleryProps> = ({ folderId }) => {
         }
       } catch (err) {
         console.error('Gallery fetchImages catch error:', err);
-        setError(`Failed to load images. ${err && err.message ? err.message : ''}`);
+        setError(`Failed to load images. ${typeof err === 'object' && err && 'message' in err ? (err as any).message : ''}`);
       }
       setLoading(false);
     }
