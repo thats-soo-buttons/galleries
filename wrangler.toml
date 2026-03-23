@@ -1,3 +1,5 @@
+# Project name required by Cloudflare Pages
+name = "galleries"
 # Wrangler configuration for OpenNext/Cloudflare Pages
 compatibility_date = "2026-03-15"
 pages_build_output_dir = ".open-next"

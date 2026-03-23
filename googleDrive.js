@@ -29,11 +29,21 @@ const drive = google.drive({ version: 'v3', auth });
  */
 async function listImages(folderId) {
   try {
-    const res = await drive.files.list({
-      q: `('${folderId}' in parents) and mimeType contains 'image/' and trashed = false`,
-      fields: 'files(id, name, mimeType, thumbnailLink)',
-    });
-    return res.data.files.map(file => ({
+    let allFiles = [];
+    let pageToken = null;
+    do {
+      const res = await drive.files.list({
+        q: `('${folderId}' in parents) and mimeType contains 'image/' and trashed = false`,
+        fields: 'nextPageToken, files(id, name, mimeType, thumbnailLink)',
+        pageToken: pageToken || undefined,
+        pageSize: 1000, // max allowed by API
+      });
+      if (res.data.files && res.data.files.length > 0) {
+        allFiles = allFiles.concat(res.data.files);
+      }
+      pageToken = res.data.nextPageToken;
+    } while (pageToken);
+    return allFiles.map(file => ({
       id: file.id,
       name: file.name,
       mimeType: file.mimeType,
