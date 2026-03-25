@@ -13,8 +13,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing folderId' });
   }
 
-  // For Wearing of the Green 2026, serve from local JSON and R2 (now using 'wearingofthegreen026')
-  if (folderId === 'wearingofthegreen026') {
+  // For Wearing of the Green 2026, serve from local JSON and R2 (now using 'wearingofthegreen2026')
+  if (folderId === 'wearingofthegreen2026') {
     try {
       const jsonPath = path.join(process.cwd(), 'public', 'data', 'wearingofthegreen2026-images.json');
       const filenames = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
