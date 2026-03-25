@@ -19,12 +19,14 @@ const Gallery: React.FC<GalleryProps> = ({ folderId }) => {
         const res = await fetch(`/api/listImages?folderId=${folderId}`);
         const data = await res.json();
         if (data.error) {
-          setError(data.error);
+          console.error('Gallery API error:', data);
+          setError(`Error: ${data.error} Details: ${data.details || ''}`);
         } else {
           setImages(data.images);
         }
       } catch (err) {
-        setError("Failed to load images.");
+        console.error('Gallery fetchImages catch error:', err);
+        setError(`Failed to load images. ${typeof err === 'object' && err && 'message' in err ? (err as any).message : ''}`);
       }
       setLoading(false);
     }
