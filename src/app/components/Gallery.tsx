@@ -65,16 +65,17 @@ const Gallery: React.FC<GalleryProps> = ({ folderId }) => {
       </div>
       <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8`}>
         {paginatedImages.map((img: any) => (
-          <div key={img.id} className="border-4 border-green-400 rounded-lg shadow-lg flex flex-col items-center bg-white p-4">
+          <div key={img.id || img.name} className="border-4 border-green-400 rounded-lg shadow-lg flex flex-col items-center bg-white p-4">
             <img
-              src={`/api/thumbnailProxy?fileId=${img.id}`}
+              src={img.thumbnailUrl || img.url}
               alt={img.name}
               className="w-full h-auto mb-2 rounded-lg"
               style={{ maxWidth: 300, border: '3px solid #22c55e', boxShadow: '0 4px 16px #22c55e33' }}
             />
             <div className="text-green-700 font-semibold mb-2">{img.name}</div>
             <a
-              href={`/api/imageProxy?fileId=${img.id}`}
+              href={img.url}
+              download
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2"

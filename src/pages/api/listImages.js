@@ -1,4 +1,6 @@
-import { listImages } from '../../../googleDrive';
+
+import fs from 'fs';
+import path from 'path';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST' && req.method !== 'GET') {
@@ -11,14 +13,23 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing folderId' });
   }
 
-  try {
-    const images = await listImages(folderId);
-    return res.status(200).json({ images });
-  } catch (error) {
-    console.error('listImages API error:', error);
-    if (error && error.stack) {
-      console.error('listImages API error stack:', error.stack);
+  // For Wearing of the Green 2026, serve from local JSON and R2
+  if (folderId === 'wearing-of-the-green-2026') {
+    try {
+      const jsonPath = path.join(process.cwd(), 'public', 'data', 'wearingofthegreen2026-images.json');
+      const filenames = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+      const baseUrl = 'https://pub-c89ef5607c4f4bb4b07455ddc8021fd0.r2.dev/';
+      const images = filenames.map(name => ({
+        name,
+        url: baseUrl + encodeURIComponent(name),
+        thumbnailUrl: baseUrl + encodeURIComponent(name) // You can use the same or generate thumbnails if needed
+      }));
+      return res.status(200).json({ images });
+    } catch (error) {
+      console.error('R2 images API error:', error);
+      return res.status(500).json({ error: 'Failed to fetch R2 images', details: error.message });
     }
-    return res.status(500).json({ error: 'Failed to fetch images', details: error.message });
   }
+  // ...existing code for other folders (Google Drive, etc.)
+  return res.status(404).json({ error: 'Gallery not found' });
 }
