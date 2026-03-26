@@ -44,7 +44,8 @@ export default async function handler(req, res) {
     // Continue, but log the error
   }
 
-  // Return folder_id for Google Drive fetch
+  // Log the folder_id being returned for debugging
+  console.log('Returning folder_id:', data.folder_id, 'for access_code:', code);
   return res.status(200).json({
     success: true,
     message: `Access granted to ${data.text} gallery.`,
