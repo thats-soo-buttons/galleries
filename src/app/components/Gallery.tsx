@@ -57,7 +57,7 @@ const Gallery: React.FC<GalleryProps> = ({ folderId }) => {
             }}
             className="border border-green-400 rounded px-2 py-1"
           >
-            {[6, 9, 12, 18].map(num => (
+            {[6, 9, 12, 18, 24, 36, 50].map(num => (
               <option key={num} value={num}>{num}</option>
             ))}
           </select>
